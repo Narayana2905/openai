@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class ChatController {
-    private final ChatClient client;//chat with LLM model
-    public ChatController(ChatClient chatClient){
+    private final ChatClient client;
+    public ChatController(@Qualifier("ollamaChatClient")ChatClient chatClient){
         this.client=chatClient;
     }
     @GetMapping("/chat")
     public String chat(@RequestParam("message")String message){
         return client.prompt()
-//                .advisors(new TokenUsageAuditAdvisor())
                 .user(message).call().content();
     }
 }

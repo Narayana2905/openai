@@ -4,6 +4,7 @@ import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.ollama.api.OllamaModel;
 import org.springframework.ai.ollama.api.OllamaOptions;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class PromptStuffingController {
     private final ChatClient client;
-    public PromptStuffingController(ChatClient chatClient){
+    public PromptStuffingController(@Qualifier("ollamaChatClient")ChatClient chatClient){
         this.client=chatClient;
     }
     @Value("classpath:/promptTemplates/systemPromptTemplate.st")

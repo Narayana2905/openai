@@ -3,6 +3,7 @@ package com.eazybytes.openai.controller;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.ollama.api.OllamaModel;
 import org.springframework.ai.ollama.api.OllamaOptions;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ import reactor.core.publisher.Flux;
 @RequestMapping("/api")
 public class StreamController {
     private final ChatClient client;
-    public StreamController(ChatClient chatClient){
+    public StreamController(@Qualifier("ollamaChatClient")ChatClient chatClient){
         this.client=chatClient;
     }
     @GetMapping("/stream")
